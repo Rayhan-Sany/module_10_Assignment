@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:module_10_assignment/elevatedButtonStyle.dart';
+import 'package:module_10_assignment/buttonAndText.dart';
 import 'package:module_10_assignment/myDialog.dart';
 import 'package:module_10_assignment/variables.dart';
 

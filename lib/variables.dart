@@ -11,7 +11,7 @@ int totalAmount=0;
   {
     'name':'T-Shirt',
     'color':'Grey',
-    'Size':'L',
+    'size':'XL',
     'price' : 30,
     'quantity':0,
     'image':'assets/images/2.png',
@@ -19,9 +19,10 @@ int totalAmount=0;
   {
     'name':'Sport Dress',
     'color':'Black',
-    'Size':'M',
-    'price' : 43,
+    'size':'M',
+    'price' :43,
     'quantity':0,
     'image':'assets/images/3.png',
   },
+
 ];

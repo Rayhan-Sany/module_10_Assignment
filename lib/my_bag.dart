@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:module_10_assignment/button_and_text.dart';
-import 'package:module_10_assignment/my_dialog.dart';
+import 'package:module_10_assignment/widgets.dart';
 import 'package:module_10_assignment/variables.dart';
 
 class MyBagPage extends StatefulWidget {
@@ -14,72 +14,9 @@ class _MyBagPageState extends State<MyBagPage> {
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.sizeOf(context);
+    totalAmount = calculateTotalAmount();
     return Scaffold(
-      bottomNavigationBar: Container(
-        height: s.height / 8.3, //93,
-        padding: EdgeInsets.symmetric(horizontal: s.width / 24), //15
-
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: s.width / 24),//15.0
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Total amount',
-                    style: TextStyle(
-                        color: const Color(0xFF9B9B9B),
-                        fontSize: s.height / 45),
-                  ),
-                  const Spacer(),
-                  Text('$totalAmount\$',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: s.height / 44.44 //18
-                          ),),
-                ],
-              ),
-            ),
-            SizedBox(height: s.height / 105), //10
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      //
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Center(
-                              child: Text(
-                            'Congratulation',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: s.height / 45,
-                            ),
-                          )),
-                          backgroundColor: Colors.white,
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xFFDB3022),
-                        surfaceTintColor: const Color(0xFFDB3022),
-                        foregroundColor: Colors.white,
-                        minimumSize: Size(s.width * 0.85, s.height / 16.66)),
-                    child: Text(
-                      'CHECK OUT',
-                      style: TextStyle(fontSize: s.height / 45),
-                    )),
-              ],
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: bottomNavigationBar(context, totalAmount),
       backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF9F9F9),
@@ -95,8 +32,8 @@ class _MyBagPageState extends State<MyBagPage> {
       ),
       body: Padding(
         padding: EdgeInsets.only(
-            left: s.width / 22.5, right: s.width / 23.5, bottom: s.width / 22.5 ),
-            //16.0
+            left: s.width / 25.5, right: s.width / 35, bottom: s.width / 22.5),
+        //16.0
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -142,7 +79,7 @@ class _MyBagPageState extends State<MyBagPage> {
       ),
       child: Row(children: [
         SizedBox(
-          height: s.height / 7, //104,
+          height: s.height / 6.6, //104,
           width: s.height / 7, //104,
           child: Image.asset(
             products[index]['image'],
@@ -179,7 +116,7 @@ class _MyBagPageState extends State<MyBagPage> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      if (products[index]['quantity'] > 0) {
+                      if (products[index]['quantity'] > 1) {
                         products[index]['quantity'] -= 1;
                         totalAmount -= products[index]['price'] as int;
                       }
@@ -189,34 +126,47 @@ class _MyBagPageState extends State<MyBagPage> {
                     child: Icon(Icons.remove, size: s.height / 33.33 //24,
                         )),
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: s.width / 60 //5
+                  padding: EdgeInsets.symmetric(horizontal: s.width / 60 //5
+                      ),
+                  child: Text(
+                    '${products[index]['quantity']}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: s.height / 37.44 //18
                         ),
-                    child: Text(
-                      '${products[index]['quantity']}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: s.height / 37.44 //18
-                          ),
-                    ),),
+                  ),
+                ),
                 ElevatedButton(
-                    onPressed: () {
+                  onPressed: () {
+                    if (products[index]['quantity'] < 10) {
                       products[index]['quantity'] += 1;
                       totalAmount += products[index]['price'] as int;
-                      if (products[index]['quantity'] == 5) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            child: MyDialog(
-                              index: index,
-                            ),
-                          ),
-                        );
-                      }
-                      setState(() {});
-                    },
-                    style: elevatedButton(context),
-                    child: Icon(Icons.add, size: s.height / 33.33),
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Center(
+                          child: Text(
+                              'You Can\'t Buy More Than 10 ${products[index]['name']} At a Time',
+                          style: TextStyle(color:Colors.black,fontSize:s.height/48),),
                         ),
+                        backgroundColor:Colors.white,
+                      ),
+                      );
+                    }
+                    if (products[index]['quantity'] == 5) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          child: MyDialog(
+                            index: index,
+                          ),
+                        ),
+                      );
+                    }
+                    setState(() {});
+                  },
+                  style: elevatedButton(context),
+                  child: Icon(Icons.add, size: s.height / 33.33),
+                ),
               ],
             ),
           ],
@@ -228,9 +178,11 @@ class _MyBagPageState extends State<MyBagPage> {
             moreVertButton(context),
             SizedBox(height: s.height / 34),
             Text(
-              '${products[index]['price']}\$',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: s.height / 38.36),
-                  ///22
+              '${products[index]['price'] * products[index]['quantity']}\$',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: s.height / 38.36),
+
+              ///22
             )
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:module_10_assignment/button_and_text.dart';
 import 'package:module_10_assignment/variables.dart';
 
 class MyDialog extends StatelessWidget {
@@ -63,4 +64,46 @@ class MyDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+Container bottomNavigationBar(BuildContext context,int totalAmount)
+{
+  Size s =MediaQuery.sizeOf(context);
+  return Container(
+    height: s.height / 8.3, //93,
+    padding: EdgeInsets.symmetric(horizontal: s.width / 24), //15
+
+    child: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: s.width / 24),//15.0
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Total amount',
+                style: TextStyle(
+                    color: const Color(0xFF9B9B9B),
+                    fontSize: s.height / 45),
+              ),
+              const Spacer(),
+              Text('$totalAmount\$',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: s.height / 44.44 //18
+                ),),
+            ],
+          ),
+        ),
+        SizedBox(height: s.height / 105), //10
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            checkOutButton(context),
+          ],
+        )
+      ],
+    ),
+  );
 }

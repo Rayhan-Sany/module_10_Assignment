@@ -25,6 +25,41 @@ IconButton moreVertButton(BuildContext context){
         size: s.height/36,
       ));
 }
+
+TextButton checkOutButton(BuildContext context,){
+  Size s =MediaQuery.sizeOf(context);
+  return TextButton(
+      onPressed: () {
+        //
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Center(
+                child: Text(
+                  'Congratulation',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: s.height / 45,
+                  ),
+                )),
+            backgroundColor: Colors.white,
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+          ),
+        );
+      },
+      style: TextButton.styleFrom(
+          backgroundColor: const Color(0xFFDB3022),
+          surfaceTintColor: const Color(0xFFDB3022),
+          foregroundColor: Colors.white,
+          minimumSize: Size(s.width * 0.85, s.height / 16.66)),
+      child: Text(
+        'CHECK OUT',
+        style: TextStyle(fontSize: s.height / 45),
+      ));
+}
+
+
 RichText myRichText1(int index,BuildContext context){
   Size s = MediaQuery.sizeOf(context);
   return RichText(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:module_10_assignment/my_bag.dart';
 
 void main()=> runApp(DevicePreview(
-  enabled: false,
+  enabled: true,
   builder: (context) {
     return const MyApp();
   }

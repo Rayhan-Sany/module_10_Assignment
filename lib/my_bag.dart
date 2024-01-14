@@ -226,7 +226,7 @@ class _MyBagPageState extends State<MyBagPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             moreVertButton(context),
-            SizedBox(height: s.height / 25),
+            SizedBox(height: s.height / 34),
             Text(
               '${products[index]['price']}\$',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: s.height / 38.36),

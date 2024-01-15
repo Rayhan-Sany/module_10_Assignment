@@ -5,13 +5,13 @@ ButtonStyle elevatedButton (BuildContext context) {
   return ElevatedButton.styleFrom(
       shape: const CircleBorder( ),
       backgroundColor: Colors.white,
-       minimumSize:  Size( s.height/22.22//36
-       , s.height/22.22//36
+       minimumSize:  Size( s.longestSide/22.22//36
+       , s.longestSide/22.22//36
    ),
       elevation: 6,
       foregroundColor: Colors.grey,
      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-     padding:  EdgeInsets.all( s.height/150.33 //6
+     padding:  EdgeInsets.all( s.longestSide/150.33 //6
      ),
       surfaceTintColor: Colors.white);
 }
@@ -22,7 +22,7 @@ IconButton moreVertButton(BuildContext context){
       icon:  Icon(
         Icons.more_vert,
         color: Colors.grey,
-        size: s.height/36,
+        size: s.longestSide/36,
       ));
 }
 
@@ -38,7 +38,7 @@ TextButton checkOutButton(BuildContext context,){
                   'Congratulation',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: s.height / 45,
+                    fontSize: s.longestSide / 45,
                   ),
                 )),
             backgroundColor: Colors.white,
@@ -52,10 +52,10 @@ TextButton checkOutButton(BuildContext context,){
           backgroundColor: const Color(0xFFDB3022),
           surfaceTintColor: const Color(0xFFDB3022),
           foregroundColor: Colors.white,
-          minimumSize: Size(s.width * 0.85, s.height / 16.66)),
+          minimumSize: Size(s.shortestSide * 0.85, s.longestSide / 16.66)),
       child: Text(
         'CHECK OUT',
-        style: TextStyle(fontSize: s.height / 45),
+        style: TextStyle(fontSize: s.longestSide / 45),
       ));
 }
 
@@ -67,14 +67,14 @@ RichText myRichText1(int index,BuildContext context){
         text: 'Color: ',
         style:  TextStyle(
           color: const Color(0xFF9B9B9B),
-          fontSize: s.height/50
+          fontSize: s.longestSide/50
         ),
         children: [
           TextSpan(
             text: '${products[index]['color']}',
             style:  TextStyle(
               color: const Color(0xFF222222),
-              fontSize: s.height/50
+              fontSize: s.longestSide/50
             ),
           ),
         ]),
@@ -87,14 +87,14 @@ RichText myRichText2(int index,BuildContext context){
         text: 'Size: ',
         style:  TextStyle(
           color: const Color(0xFF9B9B9B),
-            fontSize: s.height/50
+            fontSize: s.longestSide/50
         ),
         children: [
           TextSpan(
             text: '${products[index]['size']}',
             style:  TextStyle(
               color: const Color(0xFF222222),
-                fontSize: s.height/53
+                fontSize: s.longestSide/53
             ),
           ),
         ]),
